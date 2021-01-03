@@ -1,0 +1,8 @@
+
+
+.selectedItem {
+  opacity: 1;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, .8);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}

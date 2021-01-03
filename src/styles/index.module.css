@@ -1,0 +1,74 @@
+.mainPageContent {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.titleImage {
+  margin-right: 16px;
+}
+
+.mapContainer {
+  padding: 48px 0;
+}
+
+.citiesHeader {
+  font-size: 14px;
+  color: #999999;
+}
+
+.addedCities {
+  max-width: 700px;
+  text-align: center;
+}
+
+.cityLink {
+  margin: 0 16px;
+  color: #000000;
+  text-decoration: underline dotted;
+}
+
+.cityLink:hover {
+  text-decoration: none;
+}
+
+.footer {
+  padding: 48px 0 32px;
+}
+
+.otherLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkSeparator {
+  margin: 0 8px;
+}
+
+.emailContainer {
+  padding-top: 8px;
+  text-align: center;
+}
+
+.emailLink {
+  font-size: 14px;
+  color: #999999;
+}

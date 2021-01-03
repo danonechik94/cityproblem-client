@@ -1,0 +1,9 @@
+.profile {
+  display: inline-flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profileText {
+  margin-left: 8px;
+}

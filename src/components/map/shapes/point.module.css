@@ -1,0 +1,33 @@
+.point {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity 0.2s;
+  border-radius: 50%;
+
+  /*
+    Point coordinates are always of the upper left side of a shape
+    so we need to move the shape a little bit
+   */
+  position: relative;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.point:hover {
+  opacity: 1;
+}
+
+
+/* TODO use css variables */
+.point--generalIssue {
+  background-color: #FF7373;
+}
+
+.point--crosswalk {
+  background-color: #A60000;
+}
+
+.point--suggestion {
+  background-color: #4671D5;
+}

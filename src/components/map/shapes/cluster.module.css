@@ -1,0 +1,11 @@
+.cluster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  background-color: #081272;
+  border-radius: 50%;
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,.2);
+  color: #ffffff;
+}

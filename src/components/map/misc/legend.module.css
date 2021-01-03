@@ -1,0 +1,39 @@
+.legend {
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px 0px rgba(0,0,0,.2);
+  background-color: #ffffff;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.itemName {
+  padding: 0 0 2px 6px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.itemName:last-child {
+  padding-bottom: 0px;
+}
+
+/* TODO use css variables */
+.itemIcon--generalIssue {
+  background-color: #FF7373;
+}
+.itemIcon--crosswalk {
+  background-color: #A60000;
+}
+.itemIcon--suggestion {
+  background-color: #4671D5;
+}
+
