@@ -1,37 +1,96 @@
 .container {
   height: 100vh;
+  overflow: hidden;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.mapCanvas {
-  height: 200px;
-  width: 100%;
-  flex: 1 1 100%;
+.mapContainer {
+  position: relative;
+  flex: 1 0;
+  height: 100%;
 }
 
 .menu {
-  padding: 16px 4px;
-  width: 60px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: auto;
+  min-width: 300px;
+  padding: 16px 16px 16px 70px;
+  transform: translateX(100%) translateX(-70px);
+  overflow: hidden;
   height: 100%;
   background-color: #ffffff;
-  transition: width 0.2s;
+  transition: transform 0.2s;
+}
+
+.hamburger {
+  position: absolute;
+  left: 28px;
+  top: 16px;
 }
 
 .menuOpen {
-  width: 200px;
+  padding: 16px;
+  transform: translateX(0);
 }
 
-.floatingBar {
+
+.legend {
   position: absolute;
   z-index: 1;
-  top: 8px;
-  left: 8px;
+  top: 16px;
+  right: 86px;
+  display: inline-block;
 }
 
 .addPoint {
-  margin-top: 16px;
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  left: 16px;
   display: inline-block;
+}
+
+.cityTitle {
+  text-align: center;
+}
+
+.profile {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.menuFooter {
+  width: 100%;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.otherLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.linkSeparator {
+  margin: 0 8px;
+}
+
+.emailContainer {
+  text-align: center;
+}
+
+.emailLink {
+  font-size: 14px;
 }

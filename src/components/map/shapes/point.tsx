@@ -6,12 +6,19 @@ import styles from './point.module.css';
 import { MAP_ITEM_TYPE_NAME } from '#/constants/mapItems';
 
 type Props = {
-  itemData: {};
-  onClick: () => void;
+  className: string;
+  itemData: Issue;
+  onClick: (issue: Issue) => void;
+  selected: boolean;
 };
 
-export default function Point({ itemData: { type }, itemData, onClick, className }: Props) {
+export default function Point({ itemData: { category }, itemData, onClick, className, selected }: Props) {
   const handleClick = () => { onClick(itemData) };
-  const pointClassNames = classnames(styles.point, className, styles[`point--${MAP_ITEM_TYPE_NAME[type]}`]);
+  const pointClassNames = classnames(
+    styles.point,
+    className,
+    styles[`point--${MAP_ITEM_TYPE_NAME[category]}`],
+    { [styles.selected]: selected }
+  );
   return <div className={pointClassNames} onClick={handleClick} />
 }

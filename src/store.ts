@@ -4,6 +4,8 @@ import { useMemo } from 'react';
 // eslint-disable-next-line react-hooks/rules-of-hooks
 enableStaticRendering(typeof window === 'undefined')
 
+import { mockMapItems } from '#/constants/mapItems';
+
 let store;
 
 class Store {
@@ -11,10 +13,11 @@ class Store {
     makeObservable(this)
   }
 
+  @observable selectedIssue: Issue = null;
+  @observable issues: Issue[] = mockMapItems;
   @observable activeModal: ActiveModal = null;
 
   @action showModal = (name: string, options: ModalOptions) => {
-    console.log('show modal', name);
     this.activeModal = {
       name,
       options,
@@ -27,9 +30,13 @@ class Store {
 
   @action hydrate = (data) => {
     console.log('hydrate', data);
-    if (!data) return
+    if (!data) return;
 
     this.activeModal = data.activeModal !== null ? data.activeModal : null;
+  }
+
+  @action setSelectedIssue = (data: Issue) => {
+    this.selectedIssue = data;
   }
 }
 

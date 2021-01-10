@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, FunctionComponent } from 'react';
+import { inject } from 'mobx-react';
 
 import classnames from 'classnames';
 import styles from './map.module.css';
@@ -10,7 +11,13 @@ import useSupercluster from 'use-supercluster';
 
 import cities from '#/constants/cities';
 
-export default function Map({ city = cities.tula, items = [] }) {
+interface Props {
+  items: Issue[];
+  city: City;
+  store: Store;
+}
+
+const Map: FunctionComponent<Props> = inject('store')(({ store, city = cities.tula, items = [] }) => {
   const { center: defaultCenter, zoom: defaultZoom } = city;
 
   const mapRef = useRef();
@@ -18,16 +25,13 @@ export default function Map({ city = cities.tula, items = [] }) {
   const [zoom, setZoom] = useState(defaultZoom);
   const [selectedItemId, setSelectedItemId] = useState(null);
 
-  const points = items.map(item => ({
-    type: "Feature",
-    properties: { cluster: false, ...item },
-    geometry: {
-      type: "Point",
-      coordinates: [
-        parseFloat(item.coords.lng),
-        parseFloat(item.coords.lat)
-      ]
-    }
+  const points = items.map(({ geo_feature: { properties, ...restFeatureProps }, ...restItemProps }) => ({
+    ...restFeatureProps,
+    properties: {
+      ...properties,
+      cluster: false,
+      ...restItemProps,
+    },
   }));
 
   const { clusters, supercluster } = useSupercluster({
@@ -39,21 +43,39 @@ export default function Map({ city = cities.tula, items = [] }) {
 
   const handleItemClick = (item) => {
     setSelectedItemId(item.id);
+    store.setSelectedIssue(item);
+    store.showModal('issue');
   };
 
   const itemRenderer = (item) => {
     // TODO render shapes not only points
 
+    const {
+      properties: {
+        cluster,
+        ...itemData
+      },
+      geometry: {
+        coordinates: [longitude, latitude]
+      },
+    } = item;
+
+    const coordinates = {
+      lng: longitude,
+      lat: latitude,
+    };
+
+    const selected = itemData.id === selectedItemId;
+
     return <Point
-      className={classnames({ [styles.selectedItem]: item.id === selectedItemId })}
-      itemData={item}
+      className={classnames({ [styles.selectedItem]: selected })}
+      selected={selected}
+      itemData={itemData}
       onClick={handleItemClick}
-      {...item.coords}
+      {...coordinates}
     />
   }
 
-  console.log('defaultCenter', defaultCenter);
-  console.log('zoom', zoom);
 
   return (
     <GoogleMapReact
@@ -114,9 +136,10 @@ export default function Map({ city = cities.tula, items = [] }) {
           );
         }
 
-        const { cluster: isPointCluster, ...itemProps } = cluster.properties;
-        return itemRenderer(itemProps);
+        return itemRenderer(cluster);
       })}
     </GoogleMapReact>
   )
-}
+});
+
+export default Map;

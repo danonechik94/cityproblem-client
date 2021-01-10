@@ -18,14 +18,34 @@ export default class Profile extends React.Component<Props> {
   private readonly handleClick = () => {
     const { auth } = this.props;
     if (!auth.auth) {
-      this.props.store.showModal({
-        name: 'login',
-      });
+      this.props.store.showModal('login');
+    } else {
+      // Открыть модалку с профилем или перейти на страницу пользователя
     }
   };
 
+  private readonly prepareUserName = (): string => {
+    const {
+      auth: {
+        data: {
+          firstName,
+          lastName
+        }
+      }
+    } = this.props;
+
+    return `${firstName}${lastName ? ` ${lastName.slice(0)}.` : ''}`;
+  };
+
   private readonly renderAuthorized = (): React.ReactNode => {
-    return <div></div>;
+
+    const userName = this.prepareUserName();
+    return (
+      <React.Fragment>
+        <UserIcon />
+        <span className={styles.profileText}>{userName}</span>
+      </React.Fragment>
+    );
   };
 
   private readonly renderUnauthorized = (): React.ReactNode => {

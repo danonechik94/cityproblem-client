@@ -1,5 +1,6 @@
 import React, {createRef, RefObject} from 'react';
 
+import classnames from 'classnames';
 import styles from './modal.module.css';
 
 import Cross from '#/components/icons/cross';
@@ -11,7 +12,9 @@ interface Props {
 
 export default class Modal extends React.Component<Props> {
   static defaultProps = {
-    options: {},
+    options: {
+      position: 'middle',
+    },
   };
 
   modalContentRef: RefObject<HTMLDivElement> = createRef();
@@ -61,10 +64,10 @@ export default class Modal extends React.Component<Props> {
   };
 
   private readonly renderModal = (): React.ReactNode => {
-    const { options: { content } } = this.props;
+    const { options: { content, position } } = this.props;
     return (
-      <div className={styles.modalContainer}>
-        <div className={styles.modalContent} ref={this.modalContentRef}>
+      <div className={classnames(styles.modalContainer, [styles[`modalContainer--${position}`]])}>
+        <div className={classnames(styles.modalContent, [styles[`modalContent--${position}`]])} ref={this.modalContentRef}>
           {this.renderCloseButton()}
           {content}
         </div>

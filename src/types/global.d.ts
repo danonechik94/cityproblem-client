@@ -28,6 +28,7 @@ declare interface ActiveModal {
 }
 
 declare interface ModalOptions {
+  position: 'top' | 'middle';
   fullScreen?: boolean;
   showOverlay?: boolean;
   canUserClose?: boolean;
@@ -39,4 +40,23 @@ declare interface Store {
   showModal: (name: string, options: ModalOptions) => void;
   hideModals: () => void;
 
+}
+
+declare interface Issue {
+  id: string;
+  date_created: Date;
+  date_updated?: Date;
+  description?: string;
+  geo_feature: any;
+  title: string;
+  category: typeof MapItemType;
+  user: User;
+}
+
+declare interface City {
+  center: {
+    lat: number;
+    lng: number;
+  },
+  zoom: number;
 }

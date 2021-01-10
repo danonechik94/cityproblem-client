@@ -11,12 +11,15 @@ import Profile from '#/components/auth/profile';
 import RussiaMap from '#/components/svgMap/russia';
 import Modal from '#/components/modal/modal';
 
+import AuthForm from '#/components/auth/authForm';
+import RegistrationForm from '#/components/auth/registrationForm';
+
 export async function getServerSideProps(context) {
   return {
     props: {
       regions,
       initialState: {
-        activeModal: null,
+        activeModal: { name: 'login' },
       },
       auth: {
         auth: false,
@@ -38,16 +41,24 @@ export const regions = [
 
 const Home = inject('store')(observer((props) => {
   const { regions, auth, store: { activeModal } } = props;
-  console.log('props', props);
   const renderModal = () => {
     if (!activeModal) {
       return null;
     }
 
-    const { options, name } = activeModal;
+    let modalOptions = { ...activeModal.options };
+    switch (activeModal.name) {
+      case 'login':
+        modalOptions.content = <AuthForm />
+        break;
+
+      case 'register':
+        modalOptions.content = <RegistrationForm />
+    }
+
     const handleClose = props.store.hideModals;
     return (
-      <Modal options={options} onClose={handleClose} />
+      <Modal options={modalOptions} onClose={handleClose} />
     );
   };
 

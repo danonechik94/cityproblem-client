@@ -11,12 +11,20 @@
 
 .modalContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   padding: 16px;
+}
+
+.modalContainer--middle {
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer--top {
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .modalContent {
@@ -27,6 +35,11 @@
   border-radius: 4px;
   background-color: #ffffff;
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .16), 0 0 4px 0 rgba(0, 0, 0, .08);
+}
+
+.modalContainer--top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .closeContainer {

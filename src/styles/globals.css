@@ -5,6 +5,7 @@ body {
   font-family: 'PT Sans', sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -12,7 +13,8 @@ body {
 }
 
 a {
-  color: #6610f2;
+  /*color: #6610f2;*/
+  color: #10CAF2;
   text-decoration: none;
 }
 
